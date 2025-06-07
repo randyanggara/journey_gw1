@@ -1,0 +1,606 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --primary: #b6895b;
+    --bg: #010101;
+    --hero-content-margin-left: 5vw; /* Ubah ini untuk geser ke kanan/kiri */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body, html {
+    font-family: 'Poppins', sans-serif !important;
+    background-color: var(--bg);
+    color: #fff;
+}
+
+/* Animasi fade-in seluruh halaman saat website dibuka */
+@keyframes bodyFadeIn {
+    0% {
+        opacity: 0;
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+body {
+    animation: bodyFadeIn 1.2s cubic-bezier(.77,0,.18,1) 0s both;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 7%;
+    background-color: rgba(1, 1, 1, 0.8);
+    border-bottom: 1px solid #513c28;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.navbar .navbar-logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    font-style: italic;
+}
+
+.navbar .navbar-logo span {
+    color: var(--primary);
+}
+
+.navbar .navbar-nav {
+    background: rgba(20, 20, 20, 0.97);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    position: absolute;
+    top: 100%;
+    right: 2rem;
+    min-width: 180px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(.77,0,.18,1);
+    z-index: 999;
+    display: block;
+}
+
+.navbar .navbar-nav.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.navbar .navbar-nav a {
+    color: #fff;
+    display: block;
+    margin: 1rem 1rem !important;
+    font-size: 1.3rem !important;
+    transition: color 0.2s;
+}
+
+.navbar .navbar-nav a:hover {
+    color: var(--primary);
+}
+
+.navbar .navbar-extra a {
+    color: #fff;
+    margin: 0 0.5rem;
+}
+
+.navbar .navbar-extra a:hover {
+    color: var(--primary);
+}
+
+#hamburger-menu {
+    display: none;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 105vh;
+    display: flex;
+    align-items: center;
+    background-image: url('../img/randy.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Geser gambar ke kanan */
+    background-position: 80% 60%;
+    position: relative;
+    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0));
+    mask-image: linear-gradient(rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0));
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(1,1,1,0.7) 40%, rgba(182,137,91,0.3) 100%);
+    z-index: 1;
+    border-radius: 0;
+    pointer-events: none;
+}
+
+.hero::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+}
+
+.hero .content {
+    position: relative;
+    z-index: 2;
+    background: rgba(0,0,0,0.35);
+    border-radius: 1.2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    padding: 2.5rem 4rem;
+    backdrop-filter: blur(2px);
+    transition: box-shadow 0.3s, margin-left 0.3s;
+    margin-left: var(--hero-content-margin-left);
+    max-width: 600px;
+}
+
+.hero .content:hover {
+    box-shadow: 0 12px 40px rgba(182,137,91,0.25);
+}
+
+.hero .content h1 {
+    font-size: 5em;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+    line-height: 1.2;
+}
+
+.hero .content h1 span {
+    color: var(--primary);
+}
+
+.hero .content p {
+    font-size: 1.5rem;
+    margin-top: 0.7rem;
+    line-height: 1.4;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+}
+
+.hero .content .cta {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 1rem 3rem;
+    font-size: 1.4rem;
+    color: #fff;
+    background-color: var(--primary);
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+}
+
+.cta-lanjut {
+    display: flex;
+    align-self: var(--cta-lanjut-align);
+    margin: var(--cta-lanjut-margin);
+    font-size: var(--cta-lanjut-font-size); /* <--- Ubah ini untuk ukuran teks tombol */
+    padding: 0.8rem 2rem;
+}
+
+/* Transisi hero untuk efek geser */
+.hero,
+.hero .mask-container,
+.hero .mask-container .content {
+    transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+}
+
+/* Animasi dramatis saat web dimulai */
+@keyframes heroFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.98);
+        filter: blur(8px);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.02);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes ctaPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    80% {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.hero .content {
+    animation: heroFadeIn 1.2s cubic-bezier(.77,0,.18,1) 0.2s both;
+}
+
+.hero .content .cta,
+.cta-lanjut {
+    animation: ctaPop 1s cubic-bezier(.77,0,.18,1) 1s both;
+}
+
+/* 1. Animasi background hero */
+@keyframes heroBgFade {
+    0% {
+        filter: brightness(0) blur(8px);
+        opacity: 0;
+        background-position: 90% 80%;
+    }
+    20% {
+        filter: brightness(1) blur(0);
+        opacity: 1;
+        background-position: 80% 60%;
+    }
+    10% {
+        filter: brightness(1) blur(0);
+        opacity: 1;
+        background-position: 80% 60%;
+    }
+}
+.hero {
+    animation: heroBgFade 1.6s cubic-bezier(.77,0,.18,1) 0.1s both;
+}
+
+/* 2. Efek glow pada judul */
+@keyframes titleGlow {
+    0% {
+        text-shadow: 0 0 0px #fff, 0 0 0px var(--primary);
+    }
+    60% {
+        text-shadow: 0 0 24px #fff, 0 0 48px var(--primary);
+    }
+    100% {
+        text-shadow: 0 0 8px #fff, 0 0 16px var(--primary);
+    }
+}
+.hero .content h1 {
+    animation: titleGlow 1.2s cubic-bezier(.77,0,.18,1) 0.7s both;
+}
+
+/* 3. Animasi gradient pada tombol CTA */
+@keyframes ctaGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+.hero .content .cta,
+.cta-lanjut {
+    background: linear-gradient(90deg, var(--primary), #e0b07b, var(--primary));
+    background-size: 200% 200%;
+    animation: ctaGradient 2.5s linear infinite alternate, ctaPop 1s cubic-bezier(.77,0,.18,1) 1s both;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    box-shadow: 0 4px 16px rgba(182,137,91,0.18);
+    transition: background 0.3s, transform 0.2s;
+}
+.hero .content .cta:hover,
+.cta-lanjut:hover {
+    filter: brightness(1.15);
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 8px 24px rgba(182,137,91,0.25);
+    cursor: pointer;
+}
+
+/* Spinner Loader */
+#loader {
+  position: fixed;
+  z-index: 9999;
+  background: #fff;
+  width: 100vw;
+  height: 100vh;
+  top: 0; left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s;
+}
+
+.spinner {
+  border: 6px solid #eee;
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Scroll to Top Button */
+#scrollToTop {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 999;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  outline: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 22px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: opacity 0.3s;
+}
+#scrollToTop.show {
+  display: flex;
+  opacity: 1;
+}
+
+/* Media Queries */
+/* Laptop */
+@media (max-width: 1366px) {
+    html{
+        font-size: 75%;
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    html{
+        font-size: 62.5%;
+    }
+    #hamburger-menu {
+        display: inline-block;
+    }
+    .navbar .navbar-nav {
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        background: rgba(20, 20, 20, 0.97);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+        border-radius: 12px 0 0 12px;
+        width: 15rem;
+        height: 100vh;
+        transition: 0.3s;
+        padding: 2rem 1.5rem;
+    }
+    .navbar .navbar-nav.active {
+        right: 0;
+    }
+    .navbar .navbar-nav a {
+        color: #fff;
+        display: block;
+        margin: 1.5rem;
+        padding: 0.5rem;
+        font-size: 2rem;
+    }
+    .navbar .navbar-nav a::after {
+        transform-origin: 0 0;
+    }
+    .navbar .navbar-nav a:hover::after {
+        transform: scaleX(0.2);
+    }
+    .navbar .search-form {
+        width: 90%;
+        right: 2rem;
+    }
+    .about .row {
+        flex-wrap: wrap;
+    }
+    .about .row .about-img img {
+        height: 24rem;
+        object-fit: cover;
+        object-position: center;
+    }
+    .about .row .content {
+        padding: 0;
+    }
+    .about .row .content h3 {
+        margin-top: 1rem;
+        font-size: 2rem;
+    }
+    .about .row .content p {
+        font-size: 1.6rem;
+    }
+    .menu p {
+        font-size: 1.2rem;
+    }
+    .contact .row {
+        flex-wrap: wrap;
+    }
+    .contact .row .map {
+        height: 30rem;
+    }
+    .contact .row form {
+        padding-top: 0;
+    }
+    .modal-content {
+        flex-wrap: wrap;
+    }
+}
+
+/* Mobile Phone */
+@media (max-width: 450px) {
+    :root {
+        --hero-content-shift: -28vw;
+        --hero-content-padding-left: 20vw;
+        --hero-content-padding-right: 0vw;
+        --cta-lanjut-align: center; /* flex-start = kiri, flex-end = kanan, center = tengah */
+        --cta-lanjut-margin: 2rem 0 0 0; /* margin atas, kanan, bawah, kiri */
+        --cta-lanjut-font-size: 1.2rem; /* <--- Ubah ini untuk ukuran teks tombol */
+    }
+    html {
+        font-size: 50%;
+    }
+    .hero {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        width: 100vw;
+        background-position: 60% 60%;
+        background-size: 300%;
+        background-repeat: no-repeat;
+    }
+    .hero .content {
+        margin-top: 24rem;
+        padding: 3rem 1rem 1rem 1rem;
+        max-width: 80vw;
+        width: 100%;
+        text-align: center;
+        align-self: center;
+        background: none;
+        border-radius: 0;
+        box-shadow: none;
+        transition: transform 0.4s cubic-bezier(.77,0,.18,1), text-align 0.4s, font-size 0.4s, padding 0.4s;
+    }
+    .hero .content h1,
+    .hero .content p,
+    .hero .content .cta {
+        text-align: center;
+        color: #fff;
+        text-shadow:
+            2px 2px 8px rgba(0,0,0,0.85),
+            0 0 2px #000,
+            0 2px 4px rgba(0,0,0,0.7);
+    }
+    .hero .content h1 span {
+        color: var(--primary);
+        text-shadow:
+            2px 2px 8px rgba(0,0,0,0.85),
+            0 0 2px #000,
+            0 2px 4px rgba(0,0,0,0.7);
+    }
+    .hero .content .cta {
+        background-color: var(--primary);
+        color: #fff;
+        border: none;
+        box-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+    }
+    .hero .content.slide-hero {
+        transform: translateX(var(--hero-content-shift));
+        text-align: left;
+        font-size: 85%;
+        padding-left: var(--hero-content-padding-left);
+        padding-right: var(--hero-content-padding-right);
+        box-sizing: border-box;
+    }
+    .cta-lanjut {
+        display: flex;
+        align-self: var(--cta-lanjut-align);
+        margin: var(--cta-lanjut-margin);
+        font-size: var(--cta-lanjut-font-size); /* <--- Ubah ini untuk ukuran teks tombol */
+        padding: 0.8rem 2rem;
+    }
+}
+
+/* Tampilkan menu navbar di desktop */
+@media (min-width: 769px) {
+    .navbar .navbar-nav {
+        position: static;
+        opacity: 1;
+        pointer-events: auto;
+        background: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+        display: flex;
+        min-width: unset;
+        height: auto;
+    }
+    .navbar .navbar-nav a {
+        margin: 0 1.2rem;
+        font-size: 1.1rem;
+        padding: 0;
+        display: inline-block;
+    }
+}
+
+.hero .content h1 .no-glow {
+    animation: none !important;
+    text-shadow: none !important;
+    color: #fff !important; /* atau warna lain sesuai kebutuhan */
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+/* Hilangkan border-radius pembatas */
+.hero::before {
+    border-radius: 0 !important;
+}
+
+/* Hero Particles */
+#hero-particles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+.hero .mask-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Lightbox */
+#lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+#lightbox.active {
+    display: flex;
+}
+#lightbox img {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 1.2rem;
+    box-shadow: 0 8px 32px #000;
+    background: #222;
+    display: block;
+    margin: auto;
+    transition: transform 0.3s;
+}

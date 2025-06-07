@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>zarainj</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#" class="navbar-logo">zara<span>inJ</span>.</a>
+    <div class="navbar-nav">
+      <a href="#home">Home</a>
+      <a href="#about">Tentang Gue</a>
+      <!-- Hapus menu galeri -->
+      <a href="#products">Journey</a>
+      <a href="#blog">Galeri</a>
+      <a href="#contact">Kontak</a>
+    </div>
+    <div class="navbar-extra">
+      <a href="#" id="search-button"><i data-feather="search"></i></a>
+      <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <canvas id="hero-particles"></canvas>
+    <div class="mask-container">
+      <main class="content">
+        <h1><span class="no-glow" id="typewriter"></span></h1>
+        <p>"Akan ada cerita di setiap Kilometernya"</p>
+        <button class="cta cta-lanjut">Lanjut</button>
+      </main>
+    </div>
+  </section>
+
+  <!-- Hapus Galeri Section dan Lightbox Modal -->
+
+  <!-- Tombol scroll to top -->
+  <button id="scrollToTop" title="Kembali ke atas">&#8679;</button>
+
+  <!-- JS -->
+  <script>
+    window.addEventListener('load', function() {
+      const loader = document.getElementById('loader');
+      loader.style.opacity = '0';
+      setTimeout(() => loader.style.display = 'none', 400);
+    });
+  </script>
+  <!-- Feather Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    feather.replace();
+  </script>
+  <!-- Main JS -->
+  <script src="js/script.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+</body>
+</html>
